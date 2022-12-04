@@ -1,6 +1,6 @@
 NAME = fractol
 
-SRC = main.c mandelbrot.c
+SRC = fractol.c mandelbrot.c
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -11,7 +11,7 @@ MLX_FLAGS = -lmlx -lXext -lX11
 all: $(NAME)
 
 $(NAME):
-	cc $(SRC) $(MLX_FLAGS) -o $(NAME)
+	cc -g3 $(CFLAGS) $(SRC) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

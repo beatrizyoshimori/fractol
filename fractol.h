@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 01:33:46 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/11/30 02:09:42 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:16:05 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ typedef struct	s_image
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-
+	double	x_max;
+	double	x_min;
+	double	y_max;
+	double	y_min;
 }	t_image;
 
 typedef struct	s_data
