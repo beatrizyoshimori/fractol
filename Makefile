@@ -1,6 +1,6 @@
 NAME = fractol
 
-SRC = fractol.c mandelbrot.c
+SRC = fractol.c mandelbrot.c hook.c
 
 OBJ = $(SRC:%.c=%.o)
 

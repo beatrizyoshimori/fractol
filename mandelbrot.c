@@ -6,13 +6,13 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/01 22:34:08 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/08 22:49:02 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	make_color(int i)
+static int	make_color(int i)
 {
 	int	color;
 
