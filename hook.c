@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 22:48:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/09 01:51:47 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:07:29 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,31 @@
 
 int	zoom(int keysys, int x, int y, t_data *data)
 {
-	double	dx;
-	double	dy;
-	int	mouse_x_pos;
-	int	mouse_y_pos;
+	double	dx_max;
+	double	dx_min;
+	double	dy_max;
+	double	dy_min;
 
-	mlx_mouse_get_pos(data->ptr, data->new_window, &mouse_x_pos, &mouse_y_pos);
-	printf("\nx:%d\n", mouse_x_pos);
-	printf("\ny:%d\n", mouse_y_pos);
-	dx = (data->image.x_max - data->image.x_min) / 10;
-	dy = (data->image.y_max - data->image.y_min) / 10;
-	x = y;
+	dx_max = (data->image.x_max - ((data->image.x_max - data->image.x_min) * x / WIDTH));
+	dy_max = (data->image.y_max - ((data->image.y_max - data->image.y_min) * y / HEIGHT));
+	dx_min = (((data->image.x_max - data->image.x_min) * x / WIDTH) - data->image.x_min);
+	dy_min = (((data->image.y_max - data->image.y_min) * y / HEIGHT) - data->image.y_min);
+	// dx = (data->image.x_max - data->image.x_min) / 10;
+	// dy = (data->image.y_max - data->image.y_min) / 10;
+	printf("\n%d\n", y);
 	if (keysys == 4)
 	{
-		data->image.x_max -= dx;
-		data->image.x_min += dx;
-		data->image.y_max -= dy;
-		data->image.y_min += dy;
+		data->image.x_max -= dx_min * 0.2;
+		data->image.x_min += dx_max * 0.2;
+		data->image.y_max -= dy_min * 0.2;
+		data->image.y_min += dy_max * 0.2;
 	}
 	if (keysys == 5)
 	{
-		data->image.x_max += dx;
-		data->image.x_min -= dx;
-		data->image.y_max += dy;
-		data->image.y_min -= dy;
+		data->image.x_max += dx_min * 0.2;
+		data->image.x_min -= dx_max * 0.2;
+		data->image.y_max += dy_min * 0.2;
+		data->image.y_min -= dy_max * 0.2;
 	}
 	return (0);
 }

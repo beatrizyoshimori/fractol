@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 01:33:46 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/09 01:19:46 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:30:04 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <math.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+#include <unistd.h>
 
 
 #include <stdio.h>
@@ -26,7 +27,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 300
+# define MAX_ITER 100
 # define CX_MAX 2.0
 # define CX_MIN -2.0
 # define CY_MAX 2.0
@@ -59,5 +60,8 @@ int		handle_keypress(int keysim, t_data *data);
 int		close_program(t_data *data);
 int		start_image(t_data *data);
 void	image_pixel_put(t_image *image, int x, int y, int color);
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

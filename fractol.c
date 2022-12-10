@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:48:26 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/09 01:19:30 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:57:02 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,54 @@ void	image_pixel_put(t_image *image, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-int	main(void)
+void	error_message(void)
+{
+	ft_putstr_fd("Wrong arguments!\nTry: ./fractol Mandelbrot\n", 1);
+	return ;
+}
+
+int	check_arg(int argc, char *argv[])
+{
+	if (argc == 2)
+		if (ft_strncmp("Mandelbrot", argv[1], 10) == 0)
+			return (1);
+	error_message();
+	return (0);
+}
+
+int	main(int argc, char *argv[])
 {
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
-	data->ptr = mlx_init();
-	data->new_window = mlx_new_window(data->ptr, WIDTH, HEIGHT, "fractol");
-	data->image.x_max = 2.0;
-	data->image.x_min = -2.0;
-	data->image.y_max = 2.0;
-	data->image.y_min = -2.0;
-	start_image(data);
-	mlx_mouse_hook(data->new_window, zoom, data);
-	mlx_hook(data->new_window, KeyPress, KeyPressMask, handle_keypress, data);
-	mlx_hook(data->new_window, DestroyNotify, KeyPressMask, close_program, data);
-	mlx_loop_hook(data->ptr, start_image, data);
-	mlx_loop(data->ptr);
+	if (check_arg(argc, argv))
+	{
+		data = (t_data *)malloc(sizeof(t_data));
+		if (!data)
+			return (1);
+		data->ptr = mlx_init();
+		if (!data->ptr)
+		{
+			free(data);
+			return (1);
+		}
+		data->new_window = mlx_new_window(data->ptr, WIDTH, HEIGHT, "fractol");
+		if (!data->new_window)
+		{
+			mlx_destroy_display(data->ptr);
+			free(data->ptr);
+			free(data);
+			return (1);
+		}
+		data->image.x_max = CX_MAX;
+		data->image.x_min = CX_MIN;
+		data->image.y_max = CY_MAX;
+		data->image.y_min = CY_MIN;
+		start_image(data);
+		mlx_mouse_hook(data->new_window, zoom, data);
+		mlx_hook(data->new_window, KeyPress, KeyPressMask, handle_keypress, data);
+		mlx_hook(data->new_window, DestroyNotify, KeyPressMask, close_program, data);
+		mlx_loop_hook(data->ptr, start_image, data);
+		mlx_loop(data->ptr);
+	}
 	return (0);
 }
