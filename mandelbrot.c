@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/08 22:49:02 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:58:25 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,45 @@ static int	make_color(int i)
 	return (color);
 }
 
+int	set_mandelbrot(double cx, double cy)
+{
+	int		count;
+	double	xz;
+	double	yz;
+	double	z_temp;
+
+	count = 0;
+	xz = 0;
+	yz = 0;
+	while (xz * xz + yz * yz < 4 && count < MAX_ITER)
+	{
+		z_temp = xz * xz - yz * yz + cx;
+		yz = 2 * xz * yz + cy;
+		xz = z_temp;
+		count++;
+	}
+	return (count);
+}
+
 void	mandelbrot(t_data *data)
 {
 	int		x;
 	int		y;
-	double	xz;
-	double	yz;
-	double	z_temp;
 	double	cx;
 	double	cy;
-	int		count;
-	double	pixel_width;
-	double	pixel_height;
 	int		color;
 
-	pixel_width = (data->image.x_max - data->image.x_min) / WIDTH;
-	pixel_height = (data->image.y_max - data->image.y_min) / HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{
-		cy = data->image.y_min + y * pixel_height;
+		cy = data->image.y_min + y
+			* (data->image.y_max - data->image.y_min) / HEIGHT;
 		x = 0;
 		while (x < WIDTH)
 		{
-			cx = data->image.x_min + x * pixel_width;
-			count = 0;
-			xz = 0;
-			yz = 0;
-			while (xz * xz + yz * yz < 4 && count < MAX_ITER)
-			{
-				z_temp = xz * xz - yz * yz + cx;
-				yz = 2 * xz * yz + cy;
-				xz = z_temp;
-				count++;
-			}
-			color = make_color(count);
+			cx = data->image.x_min + x
+				* (data->image.x_max - data->image.x_min) / WIDTH;
+			color = make_color(set_mandelbrot(cx, cy));
 			image_pixel_put(&data->image, x, y, color);
 			x++;
 		}

@@ -1,24 +1,38 @@
 NAME = fractol
-
-SRC = fractol.c mandelbrot.c hook.c fractol_utils.c
-
-OBJ = $(SRC:%.c=%.o)
-
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-
 MLX_FLAGS = -lmlx -lXext -lX11
+LIBFT = ./libft/libft.a
 
-all: $(NAME)
+SRCS = fractol.c \
+	mandelbrot.c \
+	hook.c \
+	fractol_utils.c \
+	check_arg.c
 
-$(NAME):
-	cc -g3 $(CFLAGS) $(SRC) $(MLX_FLAGS) -o $(NAME)
+OBJS = $(SRCS:%.c=%.o)
+
+all: libft $(NAME)
+
+libft:
+	make -C ./libft
+
+%.o:%.c
+	cc $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJS) $(LIBFT)
+	cc $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+
+bonus: libft $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	make clean -C ./libft 
+	rm -f $(OBJS)
 
 fclean: clean
+	make fclean -C ./libft
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus libft
