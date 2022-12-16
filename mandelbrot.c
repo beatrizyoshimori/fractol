@@ -6,42 +6,42 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/10 19:58:25 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:44:24 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	make_color(int i)
-{
-	int	color;
+// static int	make_color(int i)
+// {
+// 	int	color;
 
-	if (i == MAX_ITER)
-		color = 0x00000000;
-	else if (i % 10 == 0)
-		color = 0x005984A5;
-	else if (i % 10 == 1)
-		color = 0x00243E52;
-	else if (i % 10 == 2)
-		color = 0x00A7C3DA;
-	else if (i % 10 == 3)
-		color = 0x00A3A8DE;
-	else if (i % 10 == 4)
-		color = 0x005D67DA;
-	else if (i % 10 == 5)
-		color = 0x009FA3D4;
-	else if (i % 10 == 6)
-		color = 0x00575B91;
-	else if (i % 10 == 7)
-		color = 0x00856CBF;
-	else if (i % 10 == 8)
-		color = 0x00897CA5;
-	else
-		color = 0x004B5EE4;
-	return (color);
-}
+// 	if (i == MAX_ITER)
+// 		color = 0x00000000;
+// 	else if (i % 10 == 0)
+// 		color = 0x005984A5;
+// 	else if (i % 10 == 1)
+// 		color = 0x00243E52;
+// 	else if (i % 10 == 2)
+// 		color = 0x00A7C3DA;
+// 	else if (i % 10 == 3)
+// 		color = 0x00A3A8DE;
+// 	else if (i % 10 == 4)
+// 		color = 0x005D67DA;
+// 	else if (i % 10 == 5)
+// 		color = 0x009FA3D4;
+// 	else if (i % 10 == 6)
+// 		color = 0x00575B91;
+// 	else if (i % 10 == 7)
+// 		color = 0x00856CBF;
+// 	else if (i % 10 == 8)
+// 		color = 0x00897CA5;
+// 	else
+// 		color = 0x004B5EE4;
+// 	return (color);
+// }
 
-int	set_mandelbrot(double cx, double cy)
+static int	set_mandelbrot(double cx, double cy)
 {
 	int		count;
 	double	xz;
@@ -68,6 +68,7 @@ void	mandelbrot(t_data *data)
 	double	cx;
 	double	cy;
 	int		color;
+	int	iteration;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -79,8 +80,10 @@ void	mandelbrot(t_data *data)
 		{
 			cx = data->image.x_min + x
 				* (data->image.x_max - data->image.x_min) / WIDTH;
-			color = make_color(set_mandelbrot(cx, cy));
-			image_pixel_put(&data->image, x, y, color);
+			iteration = set_mandelbrot(cx, cy);
+			//color = make_color(set_mandelbrot(cx, cy));
+			color = 0x00090f5e;
+			image_pixel_put(&data->image, x, y, color * iteration / MAX_ITER);
 			x++;
 		}
 		y++;

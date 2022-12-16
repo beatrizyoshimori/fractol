@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:48:26 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/10 19:30:54 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/13 20:54:31 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	start_image(t_data *data)
 	return (0);
 }
 
-void	first_image(t_data *data)
+static void	first_image(t_data *data)
 {
 	data->image.x_max = CX_MAX;
 	data->image.x_min = CX_MIN;

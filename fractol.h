@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 01:33:46 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/10 19:40:47 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:28:50 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 100
+# define MAX_ITER 300
 # define CX_MAX 2.0
 # define CX_MIN -2.0
 # define CY_MAX 2.0
@@ -45,11 +45,6 @@ typedef struct s_image
 	double	y_max;
 	double	y_min;
 }	t_image;
-
-typedef struct s_fractol
-{
-
-}	t_fractol;
 
 typedef struct s_data
 {
