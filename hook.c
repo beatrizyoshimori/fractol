@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 22:48:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/13 20:51:09 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:15:33 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ static void	follow_mouse(int x, int y, t_data *data)
 	data->image.y_min += dy;
 }
 
+static void	change_color(int keysim, t_data *data)
+{
+	if (keysim == XK_1)
+		data->color = 0x00000500;
+	else if (keysim == XK_2)
+		data->color = 0x00050100;
+	else if (keysim == XK_3)
+		data->color = 0x0500F001;
+	// else if (keysim == XK_4)
+	else if (keysim == XK_5)
+		data->color = 0x00000109;
+}
+
 int	zoom(int keysys, int x, int y, t_data *data)
 {
 	double	dx;
@@ -38,15 +51,16 @@ int	zoom(int keysys, int x, int y, t_data *data)
 		data->image.x_min += dx;
 		data->image.y_max -= dy;
 		data->image.y_min += dy;
+		follow_mouse(x, y, data);
 	}
-	if (keysys == 5)
+	else if (keysys == 5)
 	{
 		data->image.x_max += dx;
 		data->image.x_min -= dx;
 		data->image.y_max += dy;
 		data->image.y_min -= dy;
+		follow_mouse(x, y, data);
 	}
-	follow_mouse(x, y, data);
 	return (0);
 }
 
@@ -86,5 +100,8 @@ int	handle_keypress(int keysim, t_data *data)
 	else if (keysim == XK_Left || keysim == XK_Right
 		|| keysim == XK_Up || keysim == XK_Down)
 		move_arrow(keysim, data);
+	else if (keysim == XK_1 || keysim == XK_2 || keysim == XK_3
+		|| keysim == XK_4 || keysim == XK_5)
+		change_color(keysim, data);
 	return (0);
 }

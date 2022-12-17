@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:35:49 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/10 19:16:29 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:37:46 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,32 @@ int	close_program(t_data *data)
 	free(data);
 	exit(0);
 	return (0);
+}
+
+double	ft_atof(const char *nptr)
+{
+	int		i;
+	int		sign;
+	double	num;
+	double	power;
+
+	i = 0;
+	sign = 1;
+	if (nptr[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	num = 0.0;
+	power = 1.0;
+	while (ft_isdigit(nptr[i]) == 1)
+		num = num * 10 + (nptr[i++] - 48);
+	if (nptr[i] == '.')
+		i++;
+	while (ft_isdigit(nptr[i]) == 1)
+	{
+		num = num * 10 + (nptr[i++] - 48);
+		power *= 10;
+	}
+	return (num / power * sign);
 }

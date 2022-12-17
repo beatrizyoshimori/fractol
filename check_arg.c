@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: byoshimo <byoshimo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:37:10 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/10 19:17:50 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:10:34 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,40 @@
 
 void	error_message(void)
 {
-	ft_putstr_fd("Wrong arguments!\nTry: ./fractol Mandelbrot\n", 1);
+	ft_putstr_fd("\nWrong arguments!\n\nTo generate a fractal, you can ", 1);
+	ft_putstr_fd("choose between:\n1. Mandelbrot\n2. Julia + complex ", 1);
+	ft_putstr_fd("numbers between -2.0 and 2.0\n3. BurningShip\n\nSo your", 1);
+	ft_putstr_fd(" input should look something like this:\n", 1);
+	ft_putstr_fd("./fractol Mandelbrot\n", 1);
+	ft_putstr_fd("./fractol Julia -0.7017 0.3694\n", 1);
+	ft_putstr_fd("./fractol BurningShip\n\n", 1);
 	return ;
 }
 
-int	check_arg(int argc, char *argv[])
+int	check_arg(int argc, char *argv[], t_data *data)
 {
 	if (argc == 2)
+	{
 		if (ft_strncmp("Mandelbrot", argv[1], 10) == 0)
+		{
+			data->fractal_set = 'm';
 			return (1);
+		}
+		else if (ft_strncmp("BurningShip", argv[1], 11) == 0)
+		{
+			data->fractal_set = 'b';
+			return (1);
+		}
+	}
+	else if (argc == 4 && ft_strncmp("Julia", argv[1], 5) == 0
+		&& ft_atof(argv[2]) > -2.0 && ft_atof(argv[2]) < 2.0
+		&& ft_atof(argv[3]) > -2.0 && ft_atof(argv[3]) < 2.0)
+	{
+		data->fractal_set = 'j';
+		data->x_julia = ft_atof(argv[2]);
+		data->y_julia = ft_atof(argv[3]);
+		return (1);
+	}
 	error_message();
 	return (0);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/17 17:11:41 by byoshimo         ###   ########.fr       */
+/*   Created: 2022/12/16 19:23:48 by byoshimo          #+#    #+#             */
+/*   Updated: 2022/12/17 18:03:38 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	set_mandelbrot(double cx, double cy, t_data *data)
+static int	set_julia(double cx, double cy, t_data *data)
 {
 	int		iteration;
 	double	xz;
@@ -24,8 +24,8 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 	yz = cy;
 	while (xz * xz + yz * yz < 4 && iteration < MAX_ITER)
 	{
-		z_temp = xz * xz - yz * yz + cx;
-		yz = 2 * xz * yz + cy;
+		z_temp = xz * xz - yz * yz + data->x_julia;
+		yz = 2 * xz * yz + data->y_julia;
 		xz = z_temp;
 		iteration++;
 	}
@@ -35,7 +35,7 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 		return (data->color * iteration * iteration);
 }
 
-void	mandelbrot(t_data *data)
+void	julia(t_data *data)
 {
 	int		x;
 	int		y;
@@ -52,9 +52,7 @@ void	mandelbrot(t_data *data)
 		{
 			cx = data->image.x_min + x
 				* (data->image.x_max - data->image.x_min) / WIDTH;
-			//color = 0x00090f5e;
-			//image_pixel_put(&data->image, x, y, color * iteration / MAX_ITER);
-			image_pixel_put(&data->image, x, y, set_mandelbrot(cx, cy, data));
+			image_pixel_put(&data->image, x, y, set_julia(cx, cy, data));
 			x++;
 		}
 		y++;

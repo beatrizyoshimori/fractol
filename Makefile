@@ -5,10 +5,12 @@ MLX_FLAGS = -lmlx -lXext -lX11
 LIBFT = ./libft/libft.a
 
 SRCS = fractol.c \
-	mandelbrot.c \
 	hook.c \
 	fractol_utils.c \
-	check_arg.c
+	check_arg.c \
+	mandelbrot.c \
+	julia.c \
+	burning_ship.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -16,6 +18,7 @@ all: libft $(NAME)
 
 libft:
 	make -C ./libft
+	make bonus -C ./libft
 
 %.o:%.c
 	cc $(CFLAGS) -c $< -o $@
