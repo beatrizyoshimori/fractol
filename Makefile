@@ -1,7 +1,7 @@
 NAME = fractol
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -lmlx -lXext -lX11
+MLX_FLAGS = -lmlx -lXext -lX11 -lm
 LIBFT = ./libft/libft.a
 
 SRCS = fractol.c \

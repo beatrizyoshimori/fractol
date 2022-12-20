@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:37:10 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/17 18:10:34 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:42:23 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_message(void)
 	ft_putstr_fd("numbers between -2.0 and 2.0\n3. BurningShip\n\nSo your", 1);
 	ft_putstr_fd(" input should look something like this:\n", 1);
 	ft_putstr_fd("./fractol Mandelbrot\n", 1);
-	ft_putstr_fd("./fractol Julia -0.7017 0.3694\n", 1);
+	ft_putstr_fd("./fractol Julia -0.6782 0.3425\n", 1);
 	ft_putstr_fd("./fractol BurningShip\n\n", 1);
 	return ;
 }

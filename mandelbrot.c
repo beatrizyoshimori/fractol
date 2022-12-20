@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/17 17:11:41 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:58:46 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 	double	xz;
 	double	yz;
 	double	z_temp;
+	double	smooth;
 
 	iteration = 0;
-	xz = cx;
-	yz = cy;
+	xz = 0;
+	yz = 0;
 	while (xz * xz + yz * yz < 4 && iteration < MAX_ITER)
 	{
 		z_temp = xz * xz - yz * yz + cx;
@@ -32,7 +33,12 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 	if (iteration == MAX_ITER)
 		return (0x00000000);
 	else
+	{
+		//smooth = log(2) / sqrt(xz * xz + yz * yz) / log(2);
+		smooth = log(log(xz * xz + yz * yz)) / log(iteration) / log(2);
+		//return (data->color * iteration * (iteration + smooth));
 		return (data->color * iteration * iteration);
+	}
 }
 
 void	mandelbrot(t_data *data)
@@ -52,8 +58,6 @@ void	mandelbrot(t_data *data)
 		{
 			cx = data->image.x_min + x
 				* (data->image.x_max - data->image.x_min) / WIDTH;
-			//color = 0x00090f5e;
-			//image_pixel_put(&data->image, x, y, color * iteration / MAX_ITER);
 			image_pixel_put(&data->image, x, y, set_mandelbrot(cx, cy, data));
 			x++;
 		}

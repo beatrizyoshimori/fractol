@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 22:48:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/17 17:15:33 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:06:25 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,28 @@ static void	follow_mouse(int x, int y, t_data *data)
 	data->image.y_min += dy;
 }
 
-static void	change_color(int keysim, t_data *data)
+static void	change_color(t_data *data)
 {
-	if (keysim == XK_1)
-		data->color = 0x00000500;
-	else if (keysim == XK_2)
-		data->color = 0x00050100;
-	else if (keysim == XK_3)
-		data->color = 0x0500F001;
-	// else if (keysim == XK_4)
-	else if (keysim == XK_5)
+	if (data->color == 0x00010107)
 		data->color = 0x00000109;
+	else if (data->color == 0x00000109)
+		data->color = 0x00000500;
+	else if (data->color == 0x00000500)
+		data->color = 0x00050100;
+	else if (data->color == 0x00050100)
+		data->color = 0x00010107;
 }
 
-int	zoom(int keysys, int x, int y, t_data *data)
+int	mouse_event(int keysys, int x, int y, t_data *data)
 {
 	double	dx;
 	double	dy;
 
 	dx = (data->image.x_max - data->image.x_min) * 0.1;
 	dy = (data->image.y_max - data->image.y_min) * 0.1;
-	if (keysys == 4)
+	if (keysys == 1)
+		change_color(data);
+	else if (keysys == 4)
 	{
 		data->image.x_max -= dx;
 		data->image.x_min += dx;
@@ -71,17 +72,17 @@ static void	move_arrow(int keysim, t_data *data)
 
 	dx = (data->image.x_max - data->image.x_min) / 10;
 	dy = (data->image.y_max - data->image.y_min) / 10;
-	if (keysim == XK_Left)
+	if (keysim == ARROW_LEFT)
 	{
 		data->image.x_max -= dx;
 		data->image.x_min -= dx;
 	}
-	else if (keysim == XK_Right)
+	else if (keysim == ARROW_RIGHT)
 	{
 		data->image.x_max += dx;
 		data->image.x_min += dx;
 	}
-	else if (keysim == XK_Up)
+	else if (keysim == ARROW_UP)
 	{
 		data->image.y_max -= dy;
 		data->image.y_min -= dy;
@@ -95,13 +96,12 @@ static void	move_arrow(int keysim, t_data *data)
 
 int	handle_keypress(int keysim, t_data *data)
 {
-	if (keysim == XK_Escape)
+	if (keysim == ESC)
 		close_program(data);
-	else if (keysim == XK_Left || keysim == XK_Right
-		|| keysim == XK_Up || keysim == XK_Down)
+	else if (keysim == ARROW_LEFT || keysim == ARROW_RIGHT
+		|| keysim == ARROW_UP || keysim == ARROW_DOWN)
 		move_arrow(keysim, data);
-	else if (keysim == XK_1 || keysim == XK_2 || keysim == XK_3
-		|| keysim == XK_4 || keysim == XK_5)
-		change_color(keysim, data);
+	else if (keysim == LETTER_R)
+		first_image(data);
 	return (0);
 }
