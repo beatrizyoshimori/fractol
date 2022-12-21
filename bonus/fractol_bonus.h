@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 01:33:46 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/21 13:22:36 by byoshimo         ###   ########.fr       */
+/*   Created: 2022/12/21 18:17:18 by byoshimo          #+#    #+#             */
+/*   Updated: 2022/12/21 18:30:20 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # define WIDTH 800
 # define HEIGHT 800

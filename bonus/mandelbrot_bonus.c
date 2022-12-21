@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   mandelbrot_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 02:07:54 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/20 18:58:46 by byoshimo         ###   ########.fr       */
+/*   Created: 2022/12/21 18:31:45 by byoshimo          #+#    #+#             */
+/*   Updated: 2022/12/21 18:31:53 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 static int	set_mandelbrot(double cx, double cy, t_data *data)
 {
@@ -18,7 +18,6 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 	double	xz;
 	double	yz;
 	double	z_temp;
-	double	smooth;
 
 	iteration = 0;
 	xz = 0;
@@ -33,12 +32,7 @@ static int	set_mandelbrot(double cx, double cy, t_data *data)
 	if (iteration == MAX_ITER)
 		return (0x00000000);
 	else
-	{
-		//smooth = log(2) / sqrt(xz * xz + yz * yz) / log(2);
-		smooth = log(log(xz * xz + yz * yz)) / log(iteration) / log(2);
-		//return (data->color * iteration * (iteration + smooth));
 		return (data->color * iteration * iteration);
-	}
 }
 
 void	mandelbrot(t_data *data)

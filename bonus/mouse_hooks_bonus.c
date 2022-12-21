@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hooks.c                                      :+:      :+:    :+:   */
+/*   mouse_hooks_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 13:08:04 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/21 13:08:39 by byoshimo         ###   ########.fr       */
+/*   Created: 2022/12/21 18:35:17 by byoshimo          #+#    #+#             */
+/*   Updated: 2022/12/21 18:35:34 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 static void	follow_mouse(int x, int y, t_data *data)
 {

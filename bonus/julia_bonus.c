@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   burning_ship.c                                     :+:      :+:    :+:   */
+/*   julia_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 15:46:55 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/20 12:36:47 by byoshimo         ###   ########.fr       */
+/*   Created: 2022/12/21 18:31:03 by byoshimo          #+#    #+#             */
+/*   Updated: 2022/12/21 18:31:23 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
-static int	set_burning_ship(double cx, double cy, t_data *data)
+static int	set_julia(double cx, double cy, t_data *data)
 {
 	int		iteration;
 	double	xz;
@@ -20,12 +20,12 @@ static int	set_burning_ship(double cx, double cy, t_data *data)
 	double	z_temp;
 
 	iteration = 0;
-	xz = 0;
-	yz = 0;
+	xz = cx;
+	yz = cy;
 	while (xz * xz + yz * yz < 4 && iteration < MAX_ITER)
 	{
-		z_temp = xz * xz - yz * yz + cx;
-		yz = fabs(2 * xz * yz) + cy;
+		z_temp = xz * xz - yz * yz + data->x_julia;
+		yz = 2 * xz * yz + data->y_julia;
 		xz = z_temp;
 		iteration++;
 	}
@@ -35,7 +35,7 @@ static int	set_burning_ship(double cx, double cy, t_data *data)
 		return (data->color * iteration * iteration);
 }
 
-void	burning_ship(t_data *data)
+void	julia(t_data *data)
 {
 	int		x;
 	int		y;
@@ -52,7 +52,7 @@ void	burning_ship(t_data *data)
 		{
 			cx = data->image.x_min + x
 				* (data->image.x_max - data->image.x_min) / WIDTH;
-			image_pixel_put(&data->image, x, y, set_burning_ship(cx, cy, data));
+			image_pixel_put(&data->image, x, y, set_julia(cx, cy, data));
 			x++;
 		}
 		y++;
