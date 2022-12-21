@@ -5,7 +5,8 @@ MLX_FLAGS = -lmlx -lXext -lX11 -lm
 LIBFT = ./libft/libft.a
 
 SRCS = fractol.c \
-	hook.c \
+	key_hooks.c \
+	mouse_hooks.c \
 	fractol_utils.c \
 	check_arg.c \
 	mandelbrot.c \
@@ -18,7 +19,6 @@ all: libft $(NAME)
 
 libft:
 	make -C ./libft
-	make bonus -C ./libft
 
 %.o:%.c
 	cc $(CFLAGS) -c $< -o $@

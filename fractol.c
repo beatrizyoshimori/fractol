@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:48:26 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/20 18:41:05 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:10:03 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	first_image(t_data *data)
 	data->image.x_min = CX_MIN;
 	data->image.y_max = CY_MAX;
 	data->image.y_min = CY_MIN;
-	data->color = 0x00010107;
+	data->color = 0x00000109;
+	data->julia_set_image = 0;
 	start_image(data);
 }
 
@@ -54,6 +55,7 @@ static int	start_window(t_data *data)
 	}
 	first_image(data);
 	mlx_mouse_hook(data->window, mouse_event, data);
+	mlx_hook(data->window, 6, 1L << 6, mouse_julia, data);
 	mlx_hook(data->window, 2, 1L << 0, handle_keypress, data);
 	mlx_hook(data->window, 17, 1L << 0, close_program, data);
 	mlx_loop_hook(data->ptr, start_image, data);

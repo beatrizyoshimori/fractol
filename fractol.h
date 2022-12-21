@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 01:33:46 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/20 19:06:14 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:22:36 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define ARROW_UP 65362
 # define ARROW_RIGHT 65363
 # define ARROW_DOWN 65364
-# define LETTER_R 114
+# define KEY_R 114
+# define KEY_SPACE 32
 
 typedef struct s_image
 {
@@ -54,19 +55,20 @@ typedef struct s_data
 	int		color;
 	double	x_julia;
 	double	y_julia;
+	int		julia_set_image;
 }	t_data;
 
 void	mandelbrot(t_data *data);
 void	julia(t_data *data);
 void	burning_ship(t_data *data);
 int		mouse_event(int keysys, int x, int y, t_data *data);
+int		mouse_julia(int x, int y, t_data *data);
 int		handle_keypress(int keysim, t_data *data);
+void	image_pixel_put(t_image *image, int x, int y, int color);
 int		close_program(t_data *data);
 double	ft_atof(const char *nptr);
 int		start_image(t_data *data);
 void	first_image(t_data *data);
-void	image_pixel_put(t_image *image, int x, int y, int color);
-void	error_message(void);
 int		check_arg(int argc, char *argv[], t_data *data);
 
 #endif

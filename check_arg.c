@@ -6,13 +6,13 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:37:10 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/20 17:42:23 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:19:07 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	error_message(void)
+static void	error_message(void)
 {
 	ft_putstr_fd("\nWrong arguments!\n\nTo generate a fractal, you can ", 1);
 	ft_putstr_fd("choose between:\n1. Mandelbrot\n2. Julia + complex ", 1);
@@ -21,7 +21,6 @@ void	error_message(void)
 	ft_putstr_fd("./fractol Mandelbrot\n", 1);
 	ft_putstr_fd("./fractol Julia -0.6782 0.3425\n", 1);
 	ft_putstr_fd("./fractol BurningShip\n\n", 1);
-	return ;
 }
 
 int	check_arg(int argc, char *argv[], t_data *data)
