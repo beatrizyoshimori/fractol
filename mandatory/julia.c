@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:23:48 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/21 13:13:33 by byoshimo         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:47:39 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	set_julia(double cx, double cy, t_data *data)
 	while (xz * xz + yz * yz < 4 && iteration < MAX_ITER)
 	{
 		z_temp = xz * xz - yz * yz + data->x_julia;
-		yz = 2 * xz * yz + data->y_julia;
+		yz = 2 * xz * yz - data->y_julia;
 		xz = z_temp;
 		iteration++;
 	}
