@@ -2,36 +2,28 @@ NAME = fractol
 CFLAGS = -Wall -Wextra -Werror -g3
 MLX_FLAGS = -lmlx -lXext -lX11 -lm
 LIBFT = ./libft/libft.a
-LIBBONUS = bonus.a
+BONUSLIB = ./bonus/libbonus.a
 
-SRCS := fractol.c \
-	key_hooks.c \
-	mouse_hooks.c \
-	fractol_utils.c \
-	check_arg.c \
-	mandelbrot.c \
-	julia.c
+SRCS = mandatory/fractol.c \
+	mandatory/key_hooks.c \
+	mandatory/mouse_hooks.c \
+	mandatory/fractol_utils.c \
+	mandatory/check_arg.c \
+	mandatory/mandelbrot.c \
+	mandatory/julia.c
 
-OBJS := $(SRCS:%.c=%.o)
+OBJS = $(SRCS:%.c=%.o)
 
-OBJS := $(addprefix mandatory/, $(OBJS))
+BONUS_SRCS = bonus/fractol_bonus.c \
+	bonus/key_hooks_bonus.c \
+	bonus/mouse_hooks_bonus.c \
+	bonus/fractol_utils_bonus.c \
+	bonus/check_arg_bonus.c \
+	bonus/mandelbrot_bonus.c \
+	bonus/julia_bonus.c \
+	bonus/burning_ship_bonus.c
 
-SRCS := $(addprefix mandatory/, $(SRCS))
-
-BONUS_SRCS := fractol_bonus.c \
-	key_hooks_bonus.c \
-	mouse_hooks_bonus.c \
-	fractol_utils_bonus.c \
-	check_arg_bonus.c \
-	mandelbrot_bonus.c \
-	julia_bonus.c \
-	burning_ship_bonus.c
-
-BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
-
-BONUS_OBJS := $(addprefix bonus/, $(BONUS_OBJS))
-
-BONUS_SRCS := $(addprefix bonus/, $(BONUS_SRCS))
+BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
 
 all: libft $(NAME)
 
@@ -44,15 +36,15 @@ libft:
 $(NAME): $(OBJS) $(LIBFT)
 	cc $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
-bonus: libft $(LIBBONUS)
+bonus: libft $(BONUSLIB)
 
-$(LIBBONUS): $(BONUS_OBJS)
-	ar rcs $(LIBBONUS) $(BONUS_OBJS)
-	cc $(LIBBONUS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+$(BONUSLIB): $(BONUS_OBJS) $(LIBFT)
+	ar rcs $(BONUSLIB) $(BONUS_OBJS)
+	cc $(BONUSLIB) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	make clean -C ./libft 
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS) $(BONUSLIB)
 
 fclean: clean
 	make fclean -C ./libft
@@ -60,4 +52,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus libft
+rebonus: fclean bonus
+
+.PHONY: all clean fclean re bonus rebonus libft

@@ -18,7 +18,7 @@ static void	follow_mouse(int x, int y, t_data *data)
 	double	dy;
 
 	dx = (data->image.x_max - data->image.x_min) / WIDTH * (x - WIDTH / 2);
-	dy = (data->image.y_max - data->image.y_min) / HEIGHT * (y - WIDTH / 2);
+	dy = (data->image.y_max - data->image.y_min) / HEIGHT * (y - HEIGHT / 2);
 	data->image.x_max += dx;
 	data->image.x_min += dx;
 	data->image.y_max += dy;

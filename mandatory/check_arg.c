@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:37:10 by byoshimo          #+#    #+#             */
-/*   Updated: 2022/12/21 18:34:31 by byoshimo         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:51:38 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	error_message(void)
 	ft_putstr_fd("number between -2.0 and 2.0\n\nSo your", 1);
 	ft_putstr_fd(" input should look something like this:\n", 1);
 	ft_putstr_fd("./fractol Mandelbrot\n", 1);
-	ft_putstr_fd("./fractol Julia -0.6782 0.3425\n", 1);
+	ft_putstr_fd("./fractol Julia -0.6782 0.3425\n\n", 1);
 }
 
 int	check_arg(int argc, char *argv[], t_data *data)
